@@ -6,11 +6,6 @@ resource "aws_s3_bucket" "terraform_state_bucket"{
     }
 }
 
-# resource "aws_s3_bucket_acl" "terraform_state_bucket_access_control_list" {
-#   bucket = aws_s3_bucket.terraform_state_bucket.id
-#   acl    = "private"
-# }
-
 resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state_bucket_serverside_encryption" {
   bucket = aws_s3_bucket.terraform_state_bucket.id
 

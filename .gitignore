@@ -1,0 +1,6 @@
+/target
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json

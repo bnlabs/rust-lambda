@@ -55,8 +55,8 @@ jobs:
                 cd infrastructure
                 terraform init
                 terraform refresh
-                terraform plan
-                #terraform apply -auto-approve
+                terraform plan -out=tfplan
+                terraform apply -auto-approve tfplan
 
             - name: Deploy
               run: |

@@ -1,7 +1,7 @@
 resource "aws_lambda_function" "rust_lambda" {
   function_name = "RustLambdaHandler"
-  role          = aws_iam_role.lambda_iam_role.arn
-  handler       = "index.handler"
+  role          = aws_iam_role.rust_lambda_iam_role.arn
+  handler       = "bootstrap"
   runtime       = "provided"
 
   // Assuming the lambda code is packaged in a file named lambda.zip

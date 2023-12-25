@@ -56,7 +56,7 @@ jobs:
                 terraform init
                 terraform refresh
                 terraform plan
-                terraform apply --autoaprove
+                terraform apply --autoapprove
 
             - name: Deploy
               run: |

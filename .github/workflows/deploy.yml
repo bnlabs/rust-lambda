@@ -45,8 +45,10 @@ jobs:
             - name: Build
               run: |
                 cargo lambda build --release
-                ls
                 cd ./target
+                ls
+                echo "|||||||||||||||||||||||||||||"
+                cd release
                 ls
 
             - name: Test

@@ -53,6 +53,7 @@ jobs:
                 echo "|||||||||||||||||||||||||||||"
                 cd rust-lambda
                 ls
+                zip lambda.zip bootstrap
 
 
             - name: Test

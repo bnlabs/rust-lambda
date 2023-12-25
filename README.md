@@ -11,3 +11,6 @@ prerequisites:
 cargo lambda watch
 ```
 note: by default the lambda is hosted on localhost:9000
+
+## Rust AWS resources
+https://docs.aws.amazon.com/lambda/latest/dg/lambda-rust.html

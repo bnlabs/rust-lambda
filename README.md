@@ -10,3 +10,4 @@ prerequisites:
 ```
 cargo lambda watch
 ```
+note: by default the lambda is hosted on localhost:9000

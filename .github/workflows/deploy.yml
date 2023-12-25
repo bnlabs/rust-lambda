@@ -56,8 +56,10 @@ jobs:
                 terraform init
                 terraform refresh
                 terraform plan
-                #terraform apply --autoaprove
+                terraform apply --autoaprove
 
             - name: Deploy
+              env:
+                
               run: |
-                cargo lambda deploy
+                cargo lambda deploy --iam-role ${{ secrets.AWS_LAMBDA_ARN }} rust-lambda

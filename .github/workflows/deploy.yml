@@ -65,7 +65,7 @@ jobs:
                 terraform init
                 terraform refresh
                 terraform plan -out=tfplan
-                terrafprm apply -auto-approve
+                terraform apply -auto-approve
 
             - name: Deploy
               run: |

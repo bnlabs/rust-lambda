@@ -50,6 +50,9 @@ jobs:
                 echo "|||||||||||||||||||||||||||||"
                 cd lambda
                 ls
+                echo "|||||||||||||||||||||||||||||"
+                cd rust-lambda
+                ls
 
             - name: Test
               run: |

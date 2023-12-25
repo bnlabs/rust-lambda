@@ -5,7 +5,7 @@ resource "aws_lambda_function" "rust_lambda" {
   runtime       = "provided.al2"
   timeout       = 30
 
-  filename      = "./target/lambda/rust-lambda/bootstrap"
+  filename      = "./target/lambda/rust-lambda/lambda.zip"
 }
 
 resource "aws_iam_role" "rust_lambda_iam_role" {

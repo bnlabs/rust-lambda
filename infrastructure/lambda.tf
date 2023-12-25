@@ -6,7 +6,7 @@ resource "aws_lambda_function" "rust_lambda" {
   timeout       = 30
 
   // Assuming the lambda code is packaged in a file named lambda.zip
-  filename      = "lambda.zip"
+  filename      = "./target/lambda/rust-lambda/bootstrap"
 }
 
 resource "aws_iam_role" "rust_lambda_iam_role" {

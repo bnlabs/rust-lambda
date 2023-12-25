@@ -53,8 +53,6 @@ jobs:
                 echo "|||||||||||||||||||||||||||||"
                 cd rust-lambda
                 ls
-                echo "|||||||||||||||||||||||||||||"
-                cd bootstrap
 
 
             - name: Test
@@ -67,6 +65,7 @@ jobs:
                 terraform init
                 terraform refresh
                 terraform plan -out=tfplan
+                terrafprm apply -auto-approve
 
             - name: Deploy
               run: |

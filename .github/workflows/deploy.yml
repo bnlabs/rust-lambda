@@ -53,6 +53,9 @@ jobs:
                 echo "|||||||||||||||||||||||||||||"
                 cd rust-lambda
                 ls
+                echo "|||||||||||||||||||||||||||||"
+                cd bootstrap
+
 
             - name: Test
               run: |

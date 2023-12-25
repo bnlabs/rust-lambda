@@ -38,7 +38,15 @@ jobs:
                   aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                   aws-region: ${{ secrets.AWS_REGION }}
-                  
-            - name: build
+
+            - name: Build
               run: |
-                cargo lambda build
+                cargo lambda build --release
+
+            - name: Test
+              run: |
+                cargo test
+            
+            - name: Deploy
+              run: |
+                cargo lambda deploy

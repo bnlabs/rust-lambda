@@ -46,7 +46,17 @@ jobs:
             - name: Test
               run: |
                 cargo test
-            
-            - name: Deploy
+
+            - name: Set up Terraform
+              uses: hashicorp/setup-terraform@v3
+          
+            - name: Terraform
               run: |
-                cargo lambda deploy
+                cd infrastructure
+                terraform init
+                terraform refresh
+                terraform plan
+                
+            # - name: Deploy
+            #   run: |
+            #     cargo lambda deploy

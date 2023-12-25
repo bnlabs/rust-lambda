@@ -56,7 +56,8 @@ jobs:
                 terraform init
                 terraform refresh
                 terraform plan
-                
-            # - name: Deploy
-            #   run: |
-            #     cargo lambda deploy
+                #terraform apply --autoaprove
+
+            - name: Deploy
+              run: |
+                cargo lambda deploy

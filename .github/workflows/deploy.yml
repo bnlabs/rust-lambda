@@ -67,6 +67,6 @@ jobs:
                 terraform plan -out=tfplan
                 terraform apply -auto-approve
 
-            - name: Deploy
-              run: |
-                cargo lambda deploy --iam-role ${{ secrets.AWS_LAMBDA_ARN }} rust-lambda
+            # - name: Deploy
+            #   run: |
+            #     cargo lambda deploy --iam-role ${{ secrets.AWS_LAMBDA_ARN }} rust-lambda

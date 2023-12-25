@@ -5,7 +5,6 @@ resource "aws_lambda_function" "rust_lambda" {
   runtime       = "provided.al2"
   timeout       = 30
 
-  // Assuming the lambda code is packaged in a file named lambda.zip
   filename      = "./target/lambda/rust-lambda/bootstrap"
 }
 

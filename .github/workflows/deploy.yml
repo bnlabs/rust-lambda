@@ -48,7 +48,7 @@ jobs:
                 cd ./target
                 ls
                 echo "|||||||||||||||||||||||||||||"
-                cd release
+                cd lambda
                 ls
 
             - name: Test

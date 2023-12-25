@@ -59,7 +59,5 @@ jobs:
                 terraform apply --autoaprove
 
             - name: Deploy
-              env:
-                
               run: |
                 cargo lambda deploy --iam-role ${{ secrets.AWS_LAMBDA_ARN }} rust-lambda

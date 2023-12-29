@@ -1,5 +1,6 @@
 # rust lambda
 lambda written in rust
+[api gateway url](https://tqlvc55vh2.execute-api.us-east-1.amazonaws.com/v1/chat/)
 
 ## Run Locally
 

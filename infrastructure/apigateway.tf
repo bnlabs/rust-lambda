@@ -38,25 +38,25 @@ output "invoke_url" {
 }
 
 // enable cors
-# resource "aws_api_gateway_method" "options_method" {
-#   rest_api_id   = aws_api_gateway_rest_api.my_api.id
-#   resource_id   = aws_api_gateway_resource.my_resource.id
-#   http_method   = "OPTIONS"
-#   authorization = "NONE"
-# }
+resource "aws_api_gateway_method" "options_method" {
+  rest_api_id   = aws_api_gateway_rest_api.my_api.id
+  resource_id   = aws_api_gateway_resource.my_resource.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
 
-# resource "aws_api_gateway_method_response" "options_method_response" {
-#   rest_api_id = aws_api_gateway_rest_api.my_api.id
-#   resource_id = aws_api_gateway_resource.my_resource.id
-#   http_method = aws_api_gateway_method.options_method.http_method
-#   status_code = "200"
-#   response_models = {
-#     "application/json" = "Empty"
-#   }
+resource "aws_api_gateway_method_response" "options_method_response" {
+  rest_api_id = aws_api_gateway_rest_api.my_api.id
+  resource_id = aws_api_gateway_resource.my_resource.id
+  http_method = aws_api_gateway_method.options_method.http_method
+  status_code = "200"
+  response_models = {
+    "application/json" = "Empty"
+  }
 
-#   response_parameters = {
-#     "method.response.header.Access-Control-Allow-Headers" = true
-#     "method.response.header.Access-Control-Allow-Methods" = true
-#     "method.response.header.Access-Control-Allow-Origin"  = true
-#   }
-# }
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+}

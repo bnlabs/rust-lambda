@@ -46,3 +46,12 @@ jobs:
                 terraform refresh
                 terraform plan -out=tfplan
                 terraform apply -auto-approve
+
+            - name: Deploy to AWS Lambda
+              uses: appleboy/lambda-action@v0.0.2
+              with:
+                aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws_region: us-east-1 
+                function_name: rust-lambda
+                zip_file: bootstrap.zip

@@ -8,13 +8,14 @@ import (
 
 type MyEvent struct {
 	Name string `json:"name"`
+	Message string `json:"message"`
 }
 
 func HandleRequest(ctx context.Context, event *MyEvent) (*string, error) {
 	if event == nil {
 		return nil, fmt.Errorf("received nil event")
 	}
-	message := fmt.Sprintf("Hello there, %s!", event.Name)
+	message := fmt.Sprintf("%s : %s", event.Name, event.Message)
 	return &message, nil
 }
 

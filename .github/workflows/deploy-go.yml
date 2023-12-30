@@ -37,7 +37,7 @@ jobs:
                 
             - name: Zip Lambda
               run: |
-                zip bootstrap.zip main
+                zip bootstrap.zip bootstrap
 
             - name: Terraform
               run: |

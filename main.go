@@ -18,16 +18,22 @@ type MyEvent struct {
     } `json:"requestContext"`
 }
 
-func HandleRequest(ctx context.Context, event *MyEvent) (*string, error) {
-	if event == nil {
-		return nil, fmt.Errorf("received nil event")
-	}
+type Response struct {
+    StatusCode int    `json:"statusCode"`
+    Body       string `json:"body"`
+}
 
+func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
 	connectionID := event.RequestContext.ConnectionID
 	fmt.Sprint(connectionID)
 
-	message := fmt.Sprintf("%s : %s. Action: %s", event.Name, event.Message, event.Action)
-	return &message, nil
+	message := fmt.Sprintf("%s: %s. Action: %s", event.Name, event.Message, event.Action)
+
+	response := Response{
+        StatusCode: 200, // HTTP status code
+        Body:       message,
+    }
+	return response, nil
 }
 
 func main() {

@@ -4,3 +4,6 @@
 *.tfstate.*
 *.tfvars
 *.tfvars.json
+
+bootstrap
+bootstrap.zip

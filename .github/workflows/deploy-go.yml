@@ -43,5 +43,5 @@ jobs:
               run: |
                 cd infrastructure
                 terraform init
-                terraform plan -out=tfplan
+                terraform plan
                 terraform apply -auto-approve

@@ -34,7 +34,10 @@ jobs:
             - name: Build Lambda
               run: |
                 GOOS=linux GOARCH=amd64 go build -tags lambda.norpc -o bootstrap main.go
-                zip function.zip main
+                
+            - name: Zip Lambda
+              run: |
+                zip bootstrap.zip main
 
             - name: Terraform
               run: |

@@ -42,7 +42,7 @@ func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
 			ConnectionId: aws.String(event.RequestContext.ConnectionID),
 			Data:         []byte(message2),
 		})
-		fmt.Printf("Error: %s \n", err)
+		fmt.Printf("Error: %s \n", err.Error())
 
 		return response, error
     case "$disconnect":
@@ -67,7 +67,7 @@ func main() {
 func handle_connect(ctx context.Context, event *MyEvent) (Response, error){
 	// Handle connect
 	connectionID := event.RequestContext.ConnectionID
-	message := fmt.Sprint("%s connected",connectionID)
+	message := fmt.Sprintf("%s connected", connectionID)
 	response := Response{
 		StatusCode: 200, // HTTP status code
 		Body:       message,
@@ -78,7 +78,7 @@ func handle_connect(ctx context.Context, event *MyEvent) (Response, error){
 func handle_disconnect(ctx context.Context, event *MyEvent) (Response, error){
 	// Handle connect
 	connectionID := event.RequestContext.ConnectionID
-	message := fmt.Sprint("%s disconnected",connectionID)
+	message := fmt.Sprintf("%s connected", connectionID)
 	response := Response{
 		StatusCode: 200, // HTTP status code
 		Body:       message,

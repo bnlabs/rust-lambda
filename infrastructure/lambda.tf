@@ -25,6 +25,26 @@ resource "aws_iam_role" "rust_lambda_iam_role" {
   })
 }
 
+resource "aws_iam_role_policy" "lambda_logging" {
+  name = "lambda_logging_policy"
+  role = aws_iam_role.rust_lambda_iam_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        Resource = "arn:aws:logs:*:*:*"
+      },
+    ],
+  })
+}
+
 # resource "aws_lambda_permission" "api_gw_lambda" {
 #   statement_id  = "AllowExecutionFromAPIGateway"
 #   action        = "lambda:InvokeFunction"

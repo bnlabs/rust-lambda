@@ -33,6 +33,7 @@ func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
 	message2 := "Hello, react client!"
 
 	fmt.Printf("ENDPOINT: %s", endpoint)
+	fmt.Printf("CONNECTIONID %s", event.RequestContext.ConnectionID)
     _, err := apiGwManagementApi.PostToConnection(&apigatewaymanagementapi.PostToConnectionInput{
         ConnectionId: aws.String(event.RequestContext.ConnectionID),
         Data:         []byte(message2),

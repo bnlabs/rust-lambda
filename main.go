@@ -32,10 +32,12 @@ func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
 	apiGwManagementApi := apigatewaymanagementapi.New(sess, aws.NewConfig().WithEndpoint(endpoint))
 	message2 := "Hello, react client!"
 
+	fmt.Printf("ENDPOINT: %s", endpoint)
     _, err := apiGwManagementApi.PostToConnection(&apigatewaymanagementapi.PostToConnectionInput{
         ConnectionId: aws.String(event.RequestContext.ConnectionID),
         Data:         []byte(message2),
     })
+	fmt.Printf("Error: %s", err)
 
     switch event.RequestContext.RouteKey {
     case "$connect":

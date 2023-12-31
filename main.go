@@ -27,22 +27,23 @@ type Response struct {
 }
 
 func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
-	sess := session.Must(session.NewSession())
-	endpoint := "https://" + event.RequestContext.DomainName + "/" + event.RequestContext.Stage
-	apiGwManagementApi := apigatewaymanagementapi.New(sess, aws.NewConfig().WithEndpoint(endpoint))
-	message2 := "Hello, react client!"
-
-	fmt.Printf("ENDPOINT: %s", endpoint)
-	fmt.Printf("CONNECTIONID %s", event.RequestContext.ConnectionID)
-    _, err := apiGwManagementApi.PostToConnection(&apigatewaymanagementapi.PostToConnectionInput{
-        ConnectionId: aws.String(event.RequestContext.ConnectionID),
-        Data:         []byte(message2),
-    })
-	fmt.Printf("Error: %s", err)
-
     switch event.RequestContext.RouteKey {
     case "$connect":
 		response, error := handle_connect(ctx, event)
+
+		sess := session.Must(session.NewSession())
+		endpoint := "https://" + event.RequestContext.DomainName + "/" + event.RequestContext.Stage
+		apiGwManagementApi := apigatewaymanagementapi.New(sess, aws.NewConfig().WithEndpoint(endpoint))
+		message2 := "Hello, react client!"
+	
+		fmt.Printf("ENDPOINT: %s\n", endpoint)
+		fmt.Printf("CONNECTIONID %s\n", event.RequestContext.ConnectionID)
+		_, err := apiGwManagementApi.PostToConnection(&apigatewaymanagementapi.PostToConnectionInput{
+			ConnectionId: aws.String(event.RequestContext.ConnectionID),
+			Data:         []byte(message2),
+		})
+		fmt.Printf("Error: %s \n", err)
+
 		return response, error
     case "$disconnect":
 		response, error := handle_disconnect(ctx, event)
@@ -56,7 +57,7 @@ func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
         StatusCode: 200, // HTTP status code
         Body:       message,
     }
-	return response, err
+	return response, nil
 }
 
 func main() {

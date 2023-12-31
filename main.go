@@ -30,25 +30,6 @@ func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
     switch event.RequestContext.RouteKey {
     case "$connect":
 		response, error := handle_connect(ctx, event)
-
-		sess := session.Must(session.NewSession())
-		if(sess == nil){
-			fmt.Print("SESSION IS NULL")
-		}
-		endpoint := "https://" + event.RequestContext.DomainName + "/" + event.RequestContext.Stage
-		apiGwManagementApi := apigatewaymanagementapi.New(sess, aws.NewConfig().WithEndpoint(endpoint))
-		message2 := "Hello, react client!"
-	
-		fmt.Printf("ENDPOINT: %s\n", endpoint)
-		fmt.Printf("CONNECTIONID %s\n", event.RequestContext.ConnectionID)
-		_, err := apiGwManagementApi.PostToConnection(&apigatewaymanagementapi.PostToConnectionInput{
-			ConnectionId: aws.String(event.RequestContext.ConnectionID),
-			Data:         []byte(message2),
-		})
-		if err != nil {
-			fmt.Printf("Error sending message: %s\n", err.Error())
-		}
-
 		return response, error
     case "$disconnect":
 		response, error := handle_disconnect(ctx, event)
@@ -56,6 +37,26 @@ func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
     default:
         // Handle default message
     }
+
+
+	sess := session.Must(session.NewSession())
+	if(sess == nil){
+		fmt.Print("SESSION IS NULL")
+	}
+	endpoint := "https://" + event.RequestContext.DomainName + "/" + event.RequestContext.Stage
+	apiGwManagementApi := apigatewaymanagementapi.New(sess, aws.NewConfig().WithEndpoint(endpoint))
+	message2 := "Hello, react client!"
+
+	fmt.Printf("ENDPOINT: %s\n", endpoint)
+	fmt.Printf("CONNECTIONID %s\n", event.RequestContext.ConnectionID)
+	_, err := apiGwManagementApi.PostToConnection(&apigatewaymanagementapi.PostToConnectionInput{
+		ConnectionId: aws.String(event.RequestContext.ConnectionID),
+		Data:         []byte(message2),
+	})
+	if err != nil {
+		fmt.Printf("Error sending message: %s\n", err.Error())
+	}
+
 
 	message := fmt.Sprintf("%s: %s. Action: %s", event.Name, event.Message, event.Action)
 	response := Response{

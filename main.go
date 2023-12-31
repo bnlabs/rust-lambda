@@ -28,7 +28,7 @@ type Response struct {
 
 func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
 	sess := session.Must(session.NewSession())
-	endpoint := "https://" + "o6xs157o67.execute-api.us-east-1.amazonaws.com/v1"
+	endpoint := "https://" + event.RequestContext.DomainName + "/" + event.RequestContext.Stage
 	apiGwManagementApi := apigatewaymanagementapi.New(sess, aws.NewConfig().WithEndpoint(endpoint))
 	message2 := "Hello, react client!"
 

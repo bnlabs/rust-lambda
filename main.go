@@ -15,6 +15,7 @@ type MyEvent struct {
 	Action string `json:"action"`
 	RequestContext struct {
         ConnectionID string `json:"connectionId"`
+		RouteKey  string `json:"routeKey"`
     } `json:"requestContext"`
 }
 
@@ -24,11 +25,30 @@ type Response struct {
 }
 
 func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
-	connectionID := event.RequestContext.ConnectionID
-	fmt.Sprint(connectionID)
+    switch event.RequestContext.RouteKey {
+    case "$connect":
+        // Handle connect
+		connectionID := event.RequestContext.ConnectionID
+		message := fmt.Sprint("%s connected",connectionID)
+		response := Response{
+			StatusCode: 200, // HTTP status code
+			Body:       message,
+		}
+		return response, nil
+    case "$disconnect":
+        // Handle disconnect
+		connectionID := event.RequestContext.ConnectionID
+		message := fmt.Sprint("%s disconnected",connectionID)
+		response := Response{
+			StatusCode: 200, // HTTP status code
+			Body:       message,
+		}
+		return response, nil
+    default:
+        // Handle default message
+    }
 
 	message := fmt.Sprintf("%s: %s. Action: %s", event.Name, event.Message, event.Action)
-
 	response := Response{
         StatusCode: 200, // HTTP status code
         Body:       message,

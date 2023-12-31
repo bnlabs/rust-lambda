@@ -32,6 +32,9 @@ func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
 		response, error := handle_connect(ctx, event)
 
 		sess := session.Must(session.NewSession())
+		if(sess == nil){
+			fmt.Print("SESSION IS NULL")
+		}
 		endpoint := "https://" + event.RequestContext.DomainName + "/" + event.RequestContext.Stage
 		apiGwManagementApi := apigatewaymanagementapi.New(sess, aws.NewConfig().WithEndpoint(endpoint))
 		message2 := "Hello, react client!"
@@ -42,7 +45,9 @@ func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
 			ConnectionId: aws.String(event.RequestContext.ConnectionID),
 			Data:         []byte(message2),
 		})
-		fmt.Printf("Error: %s \n", err.Error())
+		if err != nil {
+			fmt.Printf("Error sending message: %s\n", err.Error())
+		}
 
 		return response, error
     case "$disconnect":

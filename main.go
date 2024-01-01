@@ -6,9 +6,9 @@ import (
 )
 
 type MyEvent struct {
-	Name string `json:"name"`
-	Message string `json:"message"`
-	Action string `json:"action"`
+	Name 				string `json:"name"`
+	Message 			string `json:"message"`
+	Action 				string `json:"action"`
 	RequestContext struct {
         ConnectionID	string `json:"connectionId"`
 		RouteKey 		string `json:"routeKey"`

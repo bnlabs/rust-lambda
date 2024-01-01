@@ -15,7 +15,7 @@ type data struct{
 }
 
 func handle_default(ctx context.Context, event *MyEvent) (Response, error){
-	fmt.Printf("Received event: %+v\n", event)
+	fmt.Printf("Received event (default handler): %+v\n", event)
 	sess := session.Must(session.NewSession())
 	if(sess == nil){
 		fmt.Print("SESSION IS NULL")

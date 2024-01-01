@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"github.com/aws/aws-lambda-go/lambda"
+	"fmt"
 )
 
 type MyEvent struct {
@@ -23,6 +24,7 @@ type Response struct {
 }
 
 func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
+	fmt.Printf("Received event(main.go): %+v\n", event)
     switch event.RequestContext.RouteKey {
     case "$connect":
 		response, error := handle_connect(ctx, event)
